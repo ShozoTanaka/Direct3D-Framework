@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceResources.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXGraphics.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteString2D.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteString3D.cpp">
+      <Filter>Framework Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphScene.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ArcBall.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceResources.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXGraphics.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteString2D.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteString3D.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="StepTimer.h">
+      <Filter>Framework Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphScene.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Framework Header">
+      <UniqueIdentifier>{6878e2b1-03b5-4595-adaa-9129f6c44d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework Source">
+      <UniqueIdentifier>{2b1ac3c3-6efc-4d60-90d6-cdce2cba068d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{78c96a9e-e9c2-4b49-8d5f-59130ab17b52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{34dcb579-96ee-466a-bc1c-f7d01f52ddd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{52e6727d-b2a6-4890-963d-cdeba52fd322}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="directx.ico">
+      <Filter>Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resource.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="settings.manifest">
+      <Filter>Resource</Filter>
+    </Manifest>
+  </ItemGroup>
+</Project>

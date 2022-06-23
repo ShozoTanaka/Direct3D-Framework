@@ -4,7 +4,7 @@
 std::unique_ptr<DirectXGraphics> DirectXGraphics::m_directXGraphics = nullptr;
 
 // DirectXGraphicsクラスのインスタンスを取得する
-DirectXGraphics* DirectXGraphics::GetInstance()
+DirectXGraphics* const DirectXGraphics::GetInstance()
 {
 	if (m_directXGraphics == nullptr)
 	{
@@ -19,7 +19,7 @@ DirectXGraphics::DirectXGraphics()
 	m_deviceResources(nullptr),			// デバイスリソース
 	m_commonStates(nullptr),				// コモンステート
 	m_spriteBatch(nullptr),					// スプライトバッチ
-	m_spriteFont(nullptr),								// スプライトフォント
+	m_spriteFont(nullptr),						// スプライトフォント
 	m_basicEffect(nullptr),					// ベーシックエフェクト
 	m_primitiveBatch(nullptr),				// プリミティブバッチ
 	m_rasterrizerState(nullptr),				// ラスタライザーステート

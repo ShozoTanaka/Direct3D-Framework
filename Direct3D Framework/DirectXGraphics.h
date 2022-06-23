@@ -8,7 +8,7 @@ class DirectXGraphics final
 {
 public:
 	// DirectXGraphicsクラスのインスタンスを取得する
-	static DirectXGraphics* GetInstance();
+	static DirectXGraphics* const GetInstance();
 	// デストラクタ
 	~DirectXGraphics();
 

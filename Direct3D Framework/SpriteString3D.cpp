@@ -5,9 +5,7 @@
 /// <summary>フォントサイズ</summary>
 const float SpriteString3D::DEFAULT_FONT_SIZE = 0.1f;
 
-/// <summary>
-/// コンストラクタ
-/// </summary>
+// コンストラクタ
 SpriteString3D::SpriteString3D()
 	:
 	m_inputLayout(nullptr),		// 入力レイアウト
@@ -42,20 +40,12 @@ SpriteString3D::SpriteString3D()
 	);
 }
 
-/// <summary>
-/// デストラクタ
-/// </summary>
+// デストラクタ
 SpriteString3D::~SpriteString3D()
 {
 }
 
-/// <summary>
-/// 描画する文字列を登録する
-/// </summary>
-/// <param name="string">文字列</param>
-/// <param name="position">位置</param>
-/// <param name="color">色</param>
-/// <param name="size">サイズ</param>
+// 描画する文字列を登録する
 void SpriteString3D::AddString(
 	const wchar_t* string,
 	const DirectX::SimpleMath::Vector3& position,
@@ -84,9 +74,7 @@ void SpriteString3D::RemoveString(const int& index)
 	m_strings.erase(m_strings.begin() + index);
 }
 
-/// <summary>
-/// すべての文字列配列を削除する
-/// </summary>
+// すべての文字列配列を削除する
 void SpriteString3D::RemoveAllString()
 {
 	// 配列をクリアする
@@ -94,9 +82,7 @@ void SpriteString3D::RemoveAllString()
 }
 
 
-/// <summary>
-/// 描画する
-/// </summary>
+// 描画する
 void SpriteString3D::Render()
 {
 	// スプライトバッチを取得する

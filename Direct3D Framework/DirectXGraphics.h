@@ -75,7 +75,7 @@ private:
 	DirectXGraphics(const DirectXGraphics& object) = delete;
 
 private:
-	// デバイスリソースインスタンスへのポインタ
+	// デバイスリソースへのポインタ
 	DX::DeviceResources* m_deviceResources;
 	// コモンステート
 	std::unique_ptr<DirectX::CommonStates> m_commonStates;
@@ -101,9 +101,9 @@ private:
 	// 射影行列
 	DirectX::SimpleMath::Matrix m_projection;
 
-	// デバイスを取得する
+	// デバイス
 	ID3D11Device* m_device;
-	// デバイスコンテキストを取得する
+	// デバイスコンテキスト
 	ID3D11DeviceContext* m_context;
 };
 

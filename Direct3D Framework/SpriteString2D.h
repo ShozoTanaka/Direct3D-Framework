@@ -11,8 +11,8 @@ public:
 	static const float DEFAULT_FONT_SIZE;
 
 private:
-	// Stringクラス
-	struct String
+	// InnerStringクラス
+	struct InnerString
 	{
 		// 位置
 		DirectX::SimpleMath::Vector2 m_position;
@@ -20,7 +20,7 @@ private:
 		std::wstring m_string;
 		// 色
 		DirectX::SimpleMath::Color m_color;
-		// 大きさ
+		// サイズ
 		float m_size;
 	};
 public:
@@ -48,7 +48,7 @@ public:
 
 private:
 	// 表示文字列の配列
-	std::vector<String> m_strings;
+	std::vector<InnerString> m_strings;
 };
 
 #endif	// SPRITE_STRING2D_DEFINED

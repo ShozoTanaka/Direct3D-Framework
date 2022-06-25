@@ -63,17 +63,18 @@ void SpriteString3D::AddString(
 	const float& size
 )
 {
-	String stringL;
+	// 内部文字列を宣言する
+	InnerString innerString;
 	// 文字列
-	stringL.m_string = std::wstring(string);
+	innerString.m_string = std::wstring(string);
 	// 位置
-	stringL.m_position = position;
+	innerString.m_position = position;
 	// 色
-	stringL.m_color = color;
+	innerString.m_color = color;
 	// サイズ
-	stringL.m_size = size;
+	innerString.m_size = size;
 	// 文字列配列に文字列を追加する
-	m_strings.push_back(stringL);
+	m_strings.push_back(innerString);
 }
 
 // 文字列配列のインデックス番目を削除する
@@ -106,20 +107,20 @@ void SpriteString3D::Render()
 	m_basicEffect = m_directXGraphics->GetBasicEffect();
 	// テクスチャを有効にする
 	m_basicEffect->SetTextureEnabled(true);
-	// 頂点カラーを有効にすうｒ
+	// 頂点カラーを有効にする
 	m_basicEffect->SetVertexColorEnabled(true);
 	// ビュー行列を設定する
 	m_basicEffect->SetView(m_directXGraphics->GetViewMatrix());
 	// プロジェクション行列を設定する
 	m_basicEffect->SetProjection(m_directXGraphics->GetProjectionMatrix());
 
-	// ビュー行列の回転を打ち消す行列を作成する
+	// ビュー行列の逆行列を作成する
 	DirectX::SimpleMath::Matrix invertView = m_directXGraphics->GetViewMatrix().Invert();
 	invertView._41 = 0.0f;
 	invertView._42 = 0.0f;
 	invertView._43 = 0.0f;
 
-	// スクリーン座標はY軸の上下が逆になる
+	// スクリーン座標はY軸の上下が反転する
 	DirectX::SimpleMath::Matrix scaleY;
 	scaleY._22 = -1.0f;
 

@@ -9,8 +9,8 @@ class SpriteString3D
 {
 private:
 
-	// Stringクラス
-	struct String
+	// InnerStringクラス
+	struct InnerString
 	{
 		// 位置
 		DirectX::SimpleMath::Vector3 m_position;
@@ -18,7 +18,7 @@ private:
 		std::wstring m_string;
 		// 色
 		DirectX::SimpleMath::Color m_color;
-		// 大きさ
+		// サイズ
 		float m_size;
 	};
 
@@ -52,7 +52,7 @@ private:
 	// 入力レイアウト
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
 	// 表示文字列配列
-	std::vector<String> m_strings;
+	std::vector<InnerString> m_strings;
 
 	// DirectX Graphics
 	DirectXGraphics* m_directXGraphics;

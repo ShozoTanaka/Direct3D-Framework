@@ -26,7 +26,8 @@ void SpriteString2D::AddString(
 	const float& size
 )
 {
-	String innerString;
+	// “à•”•¶š—ñ‚ğéŒ¾‚·‚é
+	InnerString innerString;
 	// •¶š—ñ‚ğ‘ã“ü‚·‚é
 	innerString.m_string = std::wstring(string);
 	// ˆÊ’u‚ğİ’è‚·‚é

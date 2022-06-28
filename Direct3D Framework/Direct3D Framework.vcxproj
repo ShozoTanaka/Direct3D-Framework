@@ -179,6 +179,7 @@
     <ClInclude Include="DeviceResources.h" />
     <ClInclude Include="DirectXGraphics.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="GraphScene.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="SpriteString2D.h" />

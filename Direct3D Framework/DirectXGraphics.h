@@ -53,6 +53,8 @@ public:
 
 	// ü•ª‚ğ•`‰æ‚·‚é
 	void DrawLine(const DirectX::SimpleMath::Vector2& position, const DirectX::SimpleMath::Vector2& vector, const DirectX::FXMVECTOR& m_color = DirectX::Colors::White);
+	// ƒxƒNƒgƒ‹‚ğ•`‰æ‚·‚é
+	void DrawVector(const DirectX::SimpleMath::Vector2& pos, const DirectX::SimpleMath::Vector2& vector, const DirectX::FXMVECTOR& color = DirectX::Colors::White);
 	// ‰~‚ğ•`‰æ‚·‚é
 	void DrawCircle(const DirectX::SimpleMath::Vector2& center, const float& radius, const DirectX::FXMVECTOR& m_color = DirectX::Colors::White, const int& split = 32);
 	// ƒ‚ƒfƒ‹‚ğ•`‰æ‚·‚é

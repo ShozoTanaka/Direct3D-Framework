@@ -8,8 +8,10 @@ DirectXGraphics* const DirectXGraphics::GetInstance()
 {
 	if (m_directXGraphics == nullptr)
 	{
+		// DirectXGraphicsクラスのインスタンスを生成する
 		m_directXGraphics.reset(new DirectXGraphics());
 	}
+	// DirectXGraphicsクラスのインスタンスを返す
 	return m_directXGraphics.get();
 }
 
@@ -162,6 +164,37 @@ void DirectXGraphics::DrawLine(
 	m_primitiveBatch->DrawLine(vertex[0], vertex[1]);
 }
 
+// ベクトルを描画する
+void DirectXGraphics::DrawVector(const DirectX::SimpleMath::Vector2& position, const DirectX::SimpleMath::Vector2& vector, const DirectX::FXMVECTOR& color)
+{
+	using namespace DirectX::SimpleMath;
+
+	// 位置を3Dに変換する
+	Vector3 position3 = Vector3(position.x, 0.0f, position.y);
+	// ベクトルを3Dに変換する 
+	Vector3 vector3 = Vector3(vector.x, 0.0f, vector.y);
+	// 矢印のベクトルを設定するサイズを設定する
+	Vector3 arrow3 = -Vector3(vector.x, 0.0f, vector.y);
+	// 正規化する
+	arrow3.Normalize();
+	// 矢印の長さ
+	arrow3 *= 5.0f;
+
+	float cos = cosf(DirectX::XMConvertToRadians(20.0f));
+	float sin = sinf(DirectX::XMConvertToRadians(20.0f));
+	// 右矢
+	Vector3 arrowR(arrow3.x * cos - arrow3.z * sin, 0.0f, arrow3.x * sin + arrow3.z * cos);
+	// 左矢
+	Vector3 arrowL(arrow3.x * cos + arrow3.z * sin, 0.0f, -arrow3.x * sin + arrow3.z * cos);
+	// 矢印を描画する
+	DrawLine(DirectX::SimpleMath::Vector2(position3.x + vector3.x, position3.z + vector3.z), Vector2(arrowR.x, arrowR.z), color);
+	// 矢印を描画する
+	DrawLine(DirectX::SimpleMath::Vector2(position3.x + vector3.x, position3.z + vector3.z), Vector2(arrowL.x, arrowL.z), color);
+	// 線分を描画する
+	DrawLine(position, vector, color);
+}
+
+
 // 円を描画する
 void DirectXGraphics::DrawCircle(
 	const DirectX::SimpleMath::Vector2& center,
@@ -170,18 +203,23 @@ void DirectXGraphics::DrawCircle(
 	const int& split
 )
 {
+	using namespace DirectX::SimpleMath;
 	// 角度を初期化する
 	float angle = 0.0f;
-	DirectX::SimpleMath::Vector2 position[2];
-	position[1] = DirectX::SimpleMath::Vector2(cosf(angle), sinf(angle)) * radius + center;
+	// 中心点をXZ平面に変換する
+	Vector3 center3 = Vector3(center.x, 0.0f, center.y);
+	// 始点を宣言する
+	Vector3 position1 = DirectX::SimpleMath::Vector3(cosf(angle), 0.0f, sinf(angle)) * radius + center3;
 	for (int index = 0; index < split; index++)
 	{
-
-		position[0] = position[1];
+		// 始点を設定する
+		Vector3 position0 = position1;
+		// 角度を計算する
 		angle += DirectX::XM_2PI / (float)split;
-		position[1] = DirectX::SimpleMath::Vector2(cosf(angle), sinf(angle)) * radius + center;
+		// 次点を計算する
+		position1 = DirectX::SimpleMath::Vector3(cosf(angle), 0.0f, sinf(angle)) * radius + center3;
 		// 円を描画する
-		DrawLine(position[0], position[1] - position[0], m_color);
+		DrawLine(Vector2(position0.x, position0.z), Vector2((position1 - position0).x, (position1 - position0).z), m_color);
 	}
 }
 

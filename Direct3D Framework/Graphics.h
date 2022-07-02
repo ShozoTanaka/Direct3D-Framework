@@ -1,6 +1,6 @@
 #pragma once
-#ifndef DERECTX_GRAPHICS_DEFINED
-#define DERECTX_GRAPHICS_DEFINED
+#ifndef GRAPHICS_DEFINED
+#define GRAPHICS_DEFINED
 #include "DeviceResources.h"
 #include "Animation.h"
 
@@ -8,6 +8,9 @@
 class Graphics final
 {
 public:
+	// DirectX Graphicsクラスのインスタンスを取得する
+	static Graphics* const GetInstance();
+
 	// スクリーンサイズを取得する
 	void GetScreenSize(int& width, int& height) const { 	width = m_screenW; height = m_screenH; }
 	// スクリーンサイズを設定する
@@ -28,7 +31,6 @@ public:
 	DirectX::SpriteFont* GetFont() { return m_spriteFont.get(); }
 	// EffectFactoryクラスのインスタンスを取得する
 	DirectX::EffectFactory* GetFX() const { return m_effectFactory.get(); }
-
 	// ビュー行列を設定する
 	void SetViewMatrix(const DirectX::SimpleMath::Matrix& view) { m_view = view; }
 	// ビュー行列を取得する
@@ -39,21 +41,14 @@ public:
 	const DirectX::SimpleMath::Matrix& GetProjectionMatrix() { return m_projection; };
 
 public:
-	// DirectX Graphicsクラスのインスタンスを取得する
-	static Graphics* const GetInstance();
-	// デストラクタ
-	~Graphics();
-
 	// 初期化する
 	void Initialize(DX::DeviceResources* deviceResources, const int& width, const int& height);
-
 	// 文字列を描画する
 	void DrawString(const float& x, const float& y, const wchar_t* str);
 	// プリミティブ描画を開始する
 	void DrawPrimitiveBegin(const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection);
 	// プリミティブ描画を終了する
 	void DrawPrimitiveEnd();
-
 	// 線分を描画する
 	void DrawLine(const DirectX::SimpleMath::Vector2& position, const DirectX::SimpleMath::Vector2& vector, const DirectX::FXMVECTOR& m_color = DirectX::Colors::White);
 	// ベクトルを描画する
@@ -71,15 +66,18 @@ public:
 	);
 
 private:
-	static std::unique_ptr<Graphics> m_graphics;
 	// コンストラクタ
 	Graphics();
-	// 代入禁止
+	// デストラクタ
+	~Graphics();
+	// 代入は許容しない
 	void operator=(const Graphics& object) = delete;
-	// コピーコンストラクタ禁止
+	// コピーコンストラクタは許容しない
 	Graphics(const Graphics& object) = delete;
 
 private:
+	// Graphicsクラスのインスタンスへのポインタ
+	static std::unique_ptr<Graphics> m_graphics;
 	// デバイスリソースへのポインタ
 	DX::DeviceResources* m_deviceResources;
 	// コモンステート
@@ -105,12 +103,11 @@ private:
 	DirectX::SimpleMath::Matrix m_view;
 	// 射影行列
 	DirectX::SimpleMath::Matrix m_projection;
-
 	// デバイス
 	ID3D11Device* m_device;
 	// デバイスコンテキスト
 	ID3D11DeviceContext* m_context;
 };
 
-#endif		// DERECTX_GRAPHICS_DEFINED
+#endif		// GRAPHICS_DEFINED
 

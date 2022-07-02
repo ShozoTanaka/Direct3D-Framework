@@ -136,14 +136,14 @@ void Graphics::DrawPrimitiveEnd()
 void Graphics::DrawLine(
 	const DirectX::SimpleMath::Vector2& position,
 	const DirectX::SimpleMath::Vector2& vector,
-	const DirectX::FXMVECTOR& m_color
+	const DirectX::FXMVECTOR& color
 )
 {
 	// ’¸“_ƒJƒ‰[‚ðÝ’è‚·‚é
 	DirectX::VertexPositionColor vertex[2] =
 	{
-		{ DirectX::SimpleMath::Vector3(position.x, 0.0f, position.y), m_color },
-		{ DirectX::SimpleMath::Vector3(position.x + vector.x, 0.0f, position.y + vector.y), m_color },
+		{ DirectX::SimpleMath::Vector3(position.x, 0.0f, position.y), color },
+		{ DirectX::SimpleMath::Vector3(position.x + vector.x, 0.0f, position.y + vector.y), color },
 	};
 	// ü•ª‚ð•`‰æ‚·‚é
 	m_primitiveBatch->DrawLine(vertex[0], vertex[1]);

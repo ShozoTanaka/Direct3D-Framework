@@ -4,21 +4,13 @@
 #include "DeviceResources.h"
 #include "Animation.h"
 
-class DirectXGraphics final
+class Graphics final
 {
 public:
-	// DirectXGraphicsクラスのインスタンスを取得する
-	static DirectXGraphics* const GetInstance();
-	// デストラクタ
-	~DirectXGraphics();
-
-	// 初期化する
-	void Initialize(DX::DeviceResources* deviceResources, const int& width, const int& height);
+	// スクリーンサイズを取得する
+	void GetScreenSize(int& width, int& height) const { 	width = m_screenW; height = m_screenH; }
 	// スクリーンサイズを設定する
-	void SetScreenSize(const int& width, const int& height);
-	// スクリーンサイズを取得する関数
-	void GetScreenSize(int& width, int& height);
-
+	void SetScreenSize(const int& width, const int& height) { m_screenW = width; m_screenH = height; }
 	// デバイスリソースを取得する
 	DX::DeviceResources* GetDeviceResources() const { return m_deviceResources; }
 	// PrimitiveBatchクラスのインスタンスを取得する
@@ -44,6 +36,16 @@ public:
 	void SetProjectionMatrix(const DirectX::SimpleMath::Matrix& projection) { m_projection = projection; }
 	// 射影行列を取得する
 	const DirectX::SimpleMath::Matrix& GetProjectionMatrix() { return m_projection; };
+
+public:
+	// DirectX Graphicsクラスのインスタンスを取得する
+	static Graphics* const GetInstance();
+	// デストラクタ
+	~Graphics();
+
+	// 初期化する
+	void Initialize(DX::DeviceResources* deviceResources, const int& width, const int& height);
+
 	// 文字列を描画する
 	void DrawString(const float& x, const float& y, const wchar_t* str);
 	// プリミティブ描画を開始する
@@ -68,13 +70,13 @@ public:
 	);
 
 private:
-	static std::unique_ptr<DirectXGraphics> m_directXGraphics;
+	static std::unique_ptr<Graphics> m_graphics;
 	// コンストラクタ
-	DirectXGraphics();
-	// 代入演算子削除
-	void operator=(const DirectXGraphics& object) = delete;
-	// コピーコンストラクタ削除
-	DirectXGraphics(const DirectXGraphics& object) = delete;
+	Graphics();
+	// 代入禁止
+	void operator=(const Graphics& object) = delete;
+	// コピーコンストラクタ禁止
+	Graphics(const Graphics& object) = delete;
 
 private:
 	// デバイスリソースへのポインタ

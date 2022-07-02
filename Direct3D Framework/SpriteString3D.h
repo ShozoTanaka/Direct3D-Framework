@@ -3,7 +3,7 @@
 #define SPRITE_STRING_3D_DEFINED
 #include <vector>
 #include <string>
-#include "DirectXGraphics.h"
+#include "Graphics.h"
 
 class SpriteString3D
 {
@@ -55,7 +55,7 @@ private:
 	std::vector<InnerString> m_strings;
 
 	// DirectX Graphics
-	DirectXGraphics* m_directXGraphics;
+	Graphics* m_directXGraphics;
 	// デバイス
 	ID3D11Device* m_device;
 	// デバイスコンテキスト

@@ -177,7 +177,7 @@
     <ClInclude Include="ArcBall.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DeviceResources.h" />
-    <ClInclude Include="DirectXGraphics.h" />
+    <ClInclude Include="Graphics.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="GraphScene.h" />
@@ -190,7 +190,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DeviceResources.cpp" />
-    <ClCompile Include="DirectXGraphics.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphScene.cpp" />
     <ClCompile Include="Main.cpp" />

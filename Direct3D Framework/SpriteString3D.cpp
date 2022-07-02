@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "SpriteString3D.h"
-#include "DirectXGraphics.h"
+#include "Graphics.h"
 
 /// <summary>フォントサイズ</summary>
 const float SpriteString3D::DEFAULT_FONT_SIZE = 0.1f;
@@ -15,7 +15,7 @@ SpriteString3D::SpriteString3D()
 	m_spriteFont(nullptr)			// スプライトフォント
 {
 	// DirectX Graphicsを取得する
-	m_directXGraphics = DirectXGraphics::GetInstance();
+	m_directXGraphics = Graphics::GetInstance();
 	// デバイスを取得する
 	m_device = m_directXGraphics->GetDeviceResources()->GetD3DDevice();
 	// デバイスコンテキストを取得する

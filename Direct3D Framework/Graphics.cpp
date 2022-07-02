@@ -1,22 +1,22 @@
 #include "pch.h"
-#include "DirectXGraphics.h"
+#include "Graphics.h"
 
-std::unique_ptr<DirectXGraphics> DirectXGraphics::m_directXGraphics = nullptr;
+std::unique_ptr<Graphics> Graphics::m_graphics = nullptr;
 
-// DirectXGraphicsクラスのインスタンスを取得する
-DirectXGraphics* const DirectXGraphics::GetInstance()
+// DirectX Graphicsクラスのインスタンスを取得する
+Graphics* const Graphics::GetInstance()
 {
-	if (m_directXGraphics == nullptr)
+	if (m_graphics == nullptr)
 	{
-		// DirectXGraphicsクラスのインスタンスを生成する
-		m_directXGraphics.reset(new DirectXGraphics());
+		// DirectX Graphicsクラスのインスタンスを生成する
+		m_graphics.reset(new Graphics());
 	}
-	// DirectXGraphicsクラスのインスタンスを返す
-	return m_directXGraphics.get();
+	// DirectX Graphicsクラスのインスタンスを返す
+	return m_graphics.get();
 }
 
 // コンストラクタ
-DirectXGraphics::DirectXGraphics()
+Graphics::Graphics()
 	:
 	m_deviceResources(nullptr),			// デバイスリソース
 	m_commonStates(nullptr),				// コモンステート
@@ -36,14 +36,13 @@ DirectXGraphics::DirectXGraphics()
 {
 }
 
-
 // デストラクタ
-DirectXGraphics::~DirectXGraphics()
+Graphics::~Graphics()
 {
 }
 
 // 初期化する
-void DirectXGraphics::Initialize(DX::DeviceResources* deviceResources, const int& width, const int& height)
+void Graphics::Initialize(DX::DeviceResources* deviceResources, const int& width, const int& height)
 {
 	// スクリーンサイズを設定する
 	SetScreenSize(width, height);
@@ -92,29 +91,15 @@ void DirectXGraphics::Initialize(DX::DeviceResources* deviceResources, const int
 	//m_fx->SetDirectory(L"resources\\cmo");
 }
 
-// スクリーンサイズを設定する
-void DirectXGraphics::SetScreenSize(const int& width, const int& height)
-{
-	m_screenW = width;
-	m_screenH = height;
-}
-
-// スクリーンサイズを取得する
-void DirectXGraphics::GetScreenSize(int& width, int& height)
-{
-	width = m_screenW;
-	height = m_screenH;
-}
-
 // 文字列を描画する
-void DirectXGraphics::DrawString(const float& x, const float& y, const wchar_t* str)
+void Graphics::DrawString(const float& x, const float& y, const wchar_t* str)
 {
 	// 文字列を描画する
 	m_spriteFont->DrawString(m_spriteBatch.get(), str, DirectX::SimpleMath::Vector2(x, y));
 }
 
 // プリミティブ描画を開始する
-void DirectXGraphics::DrawPrimitiveBegin(const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection)
+void Graphics::DrawPrimitiveBegin(const DirectX::SimpleMath::Matrix& view, const DirectX::SimpleMath::Matrix& projection)
 {
 	m_context->OMSetBlendState(m_commonStates->Opaque(), nullptr, 0xFFFFFFFF);
 	m_context->OMSetDepthStencilState(m_commonStates->DepthNone(), 0);
@@ -141,14 +126,14 @@ void DirectXGraphics::DrawPrimitiveBegin(const DirectX::SimpleMath::Matrix& view
 }
 
 // プリミティブ描画を終了する
-void DirectXGraphics::DrawPrimitiveEnd()
+void Graphics::DrawPrimitiveEnd()
 {
 	// プリミティブ描画を終了する
 	m_primitiveBatch->End();
 }
 
 // 線分を描画する
-void DirectXGraphics::DrawLine(
+void Graphics::DrawLine(
 	const DirectX::SimpleMath::Vector2& position,
 	const DirectX::SimpleMath::Vector2& vector,
 	const DirectX::FXMVECTOR& m_color
@@ -165,7 +150,7 @@ void DirectXGraphics::DrawLine(
 }
 
 // ベクトルを描画する
-void DirectXGraphics::DrawVector(const DirectX::SimpleMath::Vector2& position, const DirectX::SimpleMath::Vector2& vector, const DirectX::FXMVECTOR& color)
+void Graphics::DrawVector(const DirectX::SimpleMath::Vector2& position, const DirectX::SimpleMath::Vector2& vector, const DirectX::FXMVECTOR& color)
 {
 	using namespace DirectX::SimpleMath;
 
@@ -194,9 +179,8 @@ void DirectXGraphics::DrawVector(const DirectX::SimpleMath::Vector2& position, c
 	DrawLine(position, vector, color);
 }
 
-
 // 円を描画する
-void DirectXGraphics::DrawCircle(
+void Graphics::DrawCircle(
 	const DirectX::SimpleMath::Vector2& center,
 	const float& radius,
 	const DirectX::FXMVECTOR& m_color,
@@ -224,7 +208,7 @@ void DirectXGraphics::DrawCircle(
 }
 
 // モデルを描画する
-void DirectXGraphics::DrawModel(const DirectX::Model* model, const DirectX::SimpleMath::Matrix& world, const bool& depthBuffer)
+void Graphics::DrawModel(const DirectX::Model* model, const DirectX::SimpleMath::Matrix& world, const bool& depthBuffer)
 {
 	if (depthBuffer)
 	{
@@ -247,7 +231,7 @@ void DirectXGraphics::DrawModel(const DirectX::Model* model, const DirectX::Simp
 }
 
 // アニメーションモデルを描画する
-void DirectXGraphics::DrawModel(
+void Graphics::DrawModel(
 	const DirectX::Model* model,
 	const DX::AnimationSDKMESH* animationSDKMESH,
 	const DirectX::ModelBone::TransformArray* transformArray,
@@ -259,7 +243,7 @@ void DirectXGraphics::DrawModel(
 	// アニメーションにモデル、ボーン数、ボーンを適用する
 	animationSDKMESH->Apply(*model, bones, transformArray->get());
 	// コモンステートを取得する
-	DirectX::CommonStates* commonState = DirectXGraphics::GetInstance()->GetCommonStates();
+	DirectX::CommonStates* commonState = Graphics::GetInstance()->GetCommonStates();
 	// アニメーションを描画する
 	model->DrawSkinned(m_context, *commonState, bones, transformArray->get(), world, m_view, m_projection);
 }

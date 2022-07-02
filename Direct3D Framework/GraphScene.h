@@ -29,7 +29,14 @@ private:
 	// アークボールを使用してカメラをコントロールする
 	void ControlCamera(const DX::StepTimer& timer);
 	// グリッドを描画する
-	void DrawGrid(DirectX::FXMVECTOR xAxis, DirectX::FXMVECTOR yAxis, DirectX::FXMVECTOR origin, size_t xdivs, size_t ydivs, DirectX::GXMVECTOR m_color);
+	void DrawGrid(
+		const DirectX::FXMVECTOR& xAxis, 
+		const DirectX::FXMVECTOR& yAxis, 
+		const DirectX::FXMVECTOR& origin, 
+		const size_t& xdivs, 
+		const size_t& ydivs, 
+		const DirectX::GXMVECTOR& m_color
+	);
 	// プロジェクションを生成する
 	void CreateProjection();
 
@@ -37,7 +44,7 @@ private:
 	// Gameクラスのインスタンスへのポインタ
 	Game* m_game;
 	// DirectXGraphicsクラスのインスタンスへのポインタ
-	DirectXGraphics* m_directXGraphics;
+	Graphics* m_directXGraphics;
 	// Deviceクラスのインスタンスへのポインタ
 	ID3D11Device* m_device;
 	// DeviceContextクラスのインスタンスへのポインタ

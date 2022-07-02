@@ -30,5 +30,5 @@ void Camera::Update()
 		up
 	);
 	// ƒrƒ…[s—ñ‚ðÝ’è‚·‚é
-	DirectXGraphics::GetInstance()->SetViewMatrix(view);
+	Graphics::GetInstance()->SetViewMatrix(view);
 }

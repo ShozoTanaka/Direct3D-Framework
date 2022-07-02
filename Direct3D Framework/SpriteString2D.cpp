@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "SpriteString2D.h"
-#include "DirectXGraphics.h"
+#include "Graphics.h"
 
 // フォントサイズ
 const float SpriteString2D::DEFAULT_FONT_SIZE = 1.0f;
@@ -58,9 +58,9 @@ void SpriteString2D::RemoveAllString()
 void SpriteString2D::Render()
 {
 	// スプライトバッチを取得する
-	DirectX::SpriteBatch* spriteBatch = DirectXGraphics::GetInstance()->GetSpriteBatch();
+	DirectX::SpriteBatch* spriteBatch = Graphics::GetInstance()->GetSpriteBatch();
 	// フォントを取得する
-	DirectX::SpriteFont* font = DirectXGraphics::GetInstance()->GetFont();
+	DirectX::SpriteFont* font = Graphics::GetInstance()->GetFont();
 	// スプライトバッチを開始する
 	spriteBatch->Begin();
 	// 追加された文字列を順番に取得する

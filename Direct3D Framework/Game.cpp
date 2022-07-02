@@ -61,7 +61,7 @@ void Game::Initialize(HWND hWnd, int width, int height)
     // 画面サイズを取得する
     GetDefaultSize(screenWidth, screenHeight);
     // 画面サイズを設定する
-    DirectXGraphics::GetInstance()->SetScreenSize(screenWidth, screenHeight);
+    Graphics::GetInstance()->SetScreenSize(screenWidth, screenHeight);
     // カメラを生成する
     m_camera = std::make_unique<Camera>();
     // 射影行列を生成する
@@ -73,7 +73,7 @@ void Game::Initialize(HWND hWnd, int width, int height)
             1000.0f
         );
     // 射影行列を設定する
-    DirectXGraphics::GetInstance()->SetProjectionMatrix(projection);
+    Graphics::GetInstance()->SetProjectionMatrix(projection);
 
     // GraphSceneクラスのインスタンスを生成する
     m_graphScene = std::make_unique<GraphScene>(this);
@@ -204,7 +204,7 @@ void Game::CreateDeviceDependentResources()
     // ウィンドウの既定サイズを取得する
     GetDefaultSize(width, height);
     // DirectXを初期化する
-    DirectXGraphics::GetInstance()->Initialize(m_deviceResources.get(), width, height);
+    Graphics::GetInstance()->Initialize(m_deviceResources.get(), width, height);
 }
 
 // Allocate all memory resources that change on a window SizeChanged event.
@@ -231,7 +231,7 @@ void Game::CreateWindowSizeDependentResources()
         1000.0f
     );
     // 射影行列を設定する
-    DirectXGraphics::GetInstance()->SetProjectionMatrix(projection);
+    Graphics::GetInstance()->SetProjectionMatrix(projection);
 
     if (m_graphScene)
     {

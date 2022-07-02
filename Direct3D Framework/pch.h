@@ -63,7 +63,7 @@
 #include "GraphicsMemory.h"
 
 #include "Animation.h"
-#include "DirectXGraphics.h"
+#include "Graphics.h"
 
 #ifdef _DEBUG
 #include <dxgidebug.h>

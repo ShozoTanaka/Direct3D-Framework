@@ -10,7 +10,7 @@
     <ClCompile Include="DeviceResources.cpp">
       <Filter>Framework Source</Filter>
     </ClCompile>
-    <ClCompile Include="DirectXGraphics.cpp">
+    <ClCompile Include="Graphics.cpp">
       <Filter>Framework Source</Filter>
     </ClCompile>
     <ClCompile Include="SpriteString2D.cpp">
@@ -45,7 +45,7 @@
     <ClInclude Include="DeviceResources.h">
       <Filter>Framework Header</Filter>
     </ClInclude>
-    <ClInclude Include="DirectXGraphics.h">
+    <ClInclude Include="Graphics.h">
       <Filter>Framework Header</Filter>
     </ClInclude>
     <ClInclude Include="SpriteString2D.h">

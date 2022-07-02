@@ -36,11 +36,11 @@ GraphScene::GraphScene(Game* game)
 	m_scale(1.0f)										// スケール
 {
 	// DirectX Graphicsクラスのインスタンスを取得する
-	m_directXGraphics = DirectXGraphics::GetInstance();
+	m_directXGraphics = Graphics::GetInstance();
 	// デバイスを取得する
-	m_device = DirectXGraphics::GetInstance()->GetDeviceResources()->GetD3DDevice();
+	m_device = Graphics::GetInstance()->GetDeviceResources()->GetD3DDevice();
 	// デバイスコンテキストを取得する
-	m_context = DirectXGraphics::GetInstance()->GetDeviceResources()->GetD3DDeviceContext();
+	m_context = Graphics::GetInstance()->GetDeviceResources()->GetD3DDeviceContext();
 }
 
 // デストラクタ
@@ -169,21 +169,18 @@ void GraphScene::Finalize()
 
 // グリッドを描画する
 void GraphScene::DrawGrid(
-	DirectX::FXMVECTOR xAxis,
-	DirectX::FXMVECTOR yAxis,
-	DirectX::FXMVECTOR origin,
-	size_t xdivs,
-	size_t ydivs,
-	DirectX::GXMVECTOR m_color
+	const DirectX::FXMVECTOR& xAxis,
+	const DirectX::FXMVECTOR& yAxis,
+	const DirectX::FXMVECTOR& origin,
+	const size_t& xdivs,
+	const size_t& ydivs,
+	const DirectX::GXMVECTOR& m_color
 )
 {
 	// パフォーマンス開始イベント
 	m_directXGraphics->GetDeviceResources()->PIXBeginEvent(L"Draw Grid");
 	// プリミティブ描画を開始する
 	m_directXGraphics->DrawPrimitiveBegin(m_directXGraphics->GetViewMatrix(), m_directXGraphics->GetProjectionMatrix());
-
-	xdivs = std::max<size_t>(1, xdivs);
-	ydivs = std::max<size_t>(1, ydivs);
 
 	for (size_t index = 0; index <= xdivs; ++index)
 	{

@@ -163,7 +163,7 @@ void Graphics::DrawVector(const DirectX::SimpleMath::Vector2& position, const Di
 	// ê≥ãKâªÇ∑ÇÈ
 	arrow3.Normalize();
 	// ñÓàÛÇÃí∑Ç≥
-	arrow3 *= 5.0f;
+	arrow3 *= 3.0f;
 
 	float cos = cosf(DirectX::XMConvertToRadians(20.0f));
 	float sin = sinf(DirectX::XMConvertToRadians(20.0f));

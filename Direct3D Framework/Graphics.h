@@ -4,6 +4,7 @@
 #include "DeviceResources.h"
 #include "Animation.h"
 
+// DirectX GraphicsƒNƒ‰ƒX
 class Graphics final
 {
 public:

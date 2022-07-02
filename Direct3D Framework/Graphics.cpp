@@ -132,7 +132,7 @@ void Graphics::DrawPrimitiveEnd()
 	m_primitiveBatch->End();
 }
 
-// 線分を描画する
+// 線分を描画する(XZ平面)
 void Graphics::DrawLine(
 	const DirectX::SimpleMath::Vector2& position,
 	const DirectX::SimpleMath::Vector2& vector,
@@ -149,61 +149,58 @@ void Graphics::DrawLine(
 	m_primitiveBatch->DrawLine(vertex[0], vertex[1]);
 }
 
-// ベクトルを描画する
-void Graphics::DrawVector(const DirectX::SimpleMath::Vector2& position, const DirectX::SimpleMath::Vector2& vector, const DirectX::FXMVECTOR& color)
+// ベクトルを描画する(XZ平面)
+void Graphics::DrawVector(
+	const DirectX::SimpleMath::Vector2& position, 
+	const DirectX::SimpleMath::Vector2& vector, 
+	const DirectX::FXMVECTOR& color
+)
 {
 	using namespace DirectX::SimpleMath;
+	const float cosTheta = cosf(DirectX::XMConvertToRadians(20.0f));
+	const float sinTheta = sinf(DirectX::XMConvertToRadians(20.0f));
 
-	// 位置を3Dに変換する
-	Vector3 position3 = Vector3(position.x, 0.0f, position.y);
-	// ベクトルを3Dに変換する 
-	Vector3 vector3 = Vector3(vector.x, 0.0f, vector.y);
-	// 矢印のベクトルを設定するサイズを設定する
-	Vector3 arrow3 = -Vector3(vector.x, 0.0f, vector.y);
+	// 矢印のベクトルのサイズを設定する
+	Vector2 arrow = -vector;
 	// 正規化する
-	arrow3.Normalize();
-	// 矢印の長さ
-	arrow3 *= 3.0f;
-
-	float cos = cosf(DirectX::XMConvertToRadians(20.0f));
-	float sin = sinf(DirectX::XMConvertToRadians(20.0f));
-	// 右矢
-	Vector3 arrowR(arrow3.x * cos - arrow3.z * sin, 0.0f, arrow3.x * sin + arrow3.z * cos);
-	// 左矢
-	Vector3 arrowL(arrow3.x * cos + arrow3.z * sin, 0.0f, -arrow3.x * sin + arrow3.z * cos);
-	// 矢印を描画する
-	DrawLine(DirectX::SimpleMath::Vector2(position3.x + vector3.x, position3.z + vector3.z), Vector2(arrowR.x, arrowR.z), color);
-	// 矢印を描画する
-	DrawLine(DirectX::SimpleMath::Vector2(position3.x + vector3.x, position3.z + vector3.z), Vector2(arrowL.x, arrowL.z), color);
+	arrow.Normalize();
+	// 矢印のサイズを設定する
+	arrow *= 3.0f;
+	// 右矢 X: (xcosθ- ysinθ)  Y: (xsinθ+ ycosθ)
+	Vector2 arrowR = Vector2(arrow.x * cosTheta - arrow.y * sinTheta, arrow.x * sinTheta + arrow.y * cosTheta);
+	// 左矢 X: (xcosθ- ysinθ)  Y: (xsinθ+ ycosθ)
+	Vector2 arrowL = Vector2(arrow.x * cosTheta + arrow.y * sinTheta, -arrow.x * sinTheta + arrow.y * cosTheta);
 	// 線分を描画する
 	DrawLine(position, vector, color);
+	// 右矢を描画する
+	DrawLine(position + vector, arrowR, color);
+	// 左矢を描画する
+	DrawLine(position + vector, arrowL, color);
 }
 
-// 円を描画する
+// 円を描画する(XZ平面)
 void Graphics::DrawCircle(
 	const DirectX::SimpleMath::Vector2& center,
 	const float& radius,
-	const DirectX::FXMVECTOR& m_color,
+	const DirectX::FXMVECTOR& color,
 	const int& split
 )
 {
 	using namespace DirectX::SimpleMath;
 	// 角度を初期化する
 	float angle = 0.0f;
-	// 中心点をXZ平面に変換する
-	Vector3 center3 = Vector3(center.x, 0.0f, center.y);
 	// 始点を宣言する
-	Vector3 position1 = DirectX::SimpleMath::Vector3(cosf(angle), 0.0f, sinf(angle)) * radius + center3;
+	Vector2 position1 = center + Vector2(cosf(angle), sinf(angle)) * radius;
 	for (int index = 0; index < split; index++)
 	{
 		// 始点を設定する
-		Vector3 position0 = position1;
+		Vector2 position0 = position1;
 		// 角度を計算する
 		angle += DirectX::XM_2PI / (float)split;
 		// 次点を計算する
-		position1 = DirectX::SimpleMath::Vector3(cosf(angle), 0.0f, sinf(angle)) * radius + center3;
+		position1 = center + Vector2(cosf(angle), sinf(angle)) * radius;
 		// 円を描画する
-		DrawLine(Vector2(position0.x, position0.z), Vector2((position1 - position0).x, (position1 - position0).z), m_color);
+		DrawLine(position0, position1 - position0, color);
 	}
 }
 

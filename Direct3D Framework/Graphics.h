@@ -41,6 +41,8 @@ public:
 	const DirectX::SimpleMath::Matrix& GetProjectionMatrix() { return m_projection; };
 
 public:
+	// デストラクタ
+	~Graphics();
 	// 初期化する
 	void Initialize(DX::DeviceResources* deviceResources, const int& width, const int& height);
 	// 文字列を描画する
@@ -68,8 +70,7 @@ public:
 private:
 	// コンストラクタ
 	Graphics();
-	// デストラクタ
-	~Graphics();
+
 	// 代入は許容しない
 	void operator=(const Graphics& object) = delete;
 	// コピーコンストラクタは許容しない

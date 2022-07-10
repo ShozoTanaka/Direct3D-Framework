@@ -176,6 +176,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="ArcBall.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Common.h" />
     <ClInclude Include="DeviceResources.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Game.h" />

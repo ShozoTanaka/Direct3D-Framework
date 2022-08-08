@@ -12,3 +12,11 @@ inline float Cross2D(const DirectX::SimpleMath::Vector2& a, const DirectX::Simpl
 {
 	return a.x * b.y - a.y * b.x;
 }
+
+// ベクトルを正規化する
+inline DirectX::SimpleMath::Vector2 Normalize(const DirectX::SimpleMath::Vector2& v1)
+{
+	// ベクトルを正規化する
+	return v1 * (1.0f / v1.Length());
+}
+

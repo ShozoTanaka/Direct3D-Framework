@@ -2,33 +2,6 @@
 #include "SimpleMath.h"
 #include "Common.h"
 
-// 円と線分の交差判定を行う
-inline bool IntersectCircleLine(
-	const DirectX::SimpleMath::Vector2& center,					// 中心点
-	const float& radius,																// 半径
-	const DirectX::SimpleMath::Vector2& start,						// 線分の開始
-	const DirectX::SimpleMath::Vector2& end							// 線分の終了
-)
-{
-	// 線分の開始地点から円の中心へのベクトル
-	DirectX::SimpleMath::Vector2 startToCenter = center - start;
-	// 線分の終了地点から円の中心へのベクトル
-	DirectX::SimpleMath::Vector2 endToCenter = center - end;
-	// 線分の開始位置から終了位置へのベクトル
-	DirectX::SimpleMath::Vector2 startToEnd = end - start;
-	// 円の中心から線分までの距離を計算する
-	float length = Cross2D(startToCenter, startToEnd) / startToEnd.Length();
-
-	if (abs(length) <= radius)
-	{
-		if (Dot2D(startToCenter, startToEnd) * Dot2D(endToCenter, startToEnd) <= 0)
-			return true;
-		else if (radius > startToCenter.Length() || radius > endToCenter.Length())
-			return true;
-	}
-	return false;
-}
-
 // 光線と平面の交差判定を行う
 inline bool IntersectRayPlane(
 	const DirectX::SimpleMath::Ray& ray,
@@ -80,21 +53,47 @@ inline bool IntersectCircleLine(
 	const DirectX::SimpleMath::Vector2& end							// 線分の終了
 )
 {
-	// 線分の開始地点から円の中心へのベクトル
-	DirectX::SimpleMath::Vector2 startToCenter = center - start;
-	// 線分の終了地点から円の中心へのベクトル
-	DirectX::SimpleMath::Vector2 endToCenter = center - end;
 	// 線分の開始位置から終了位置へのベクトル
-	DirectX::SimpleMath::Vector2 startToEnd = end - start;
+	DirectX::SimpleMath::Vector2 vectorV1 = end - start;
+	// 線分の開始地点から円の中心へのベクトル
+	DirectX::SimpleMath::Vector2 vectorV2 = center - start;
+	// 線分の終了地点から円の中心へのベクトル
+	DirectX::SimpleMath::Vector2 vectorV3 = center - end;
+	// 線分の開始位置から終了位置へのベクトルを正規化する
+	DirectX::SimpleMath::Vector2 normalVector1 = Normalize(vectorV1);
 	// 円の中心から線分までの距離を計算する
-	float length = Cross2D(startToCenter, startToEnd) / startToEnd.Length();
-
+	float length = Cross2D(vectorV2, normalVector1);
+	// 円の中心から線分までの距離が半径より小さい場合
 	if (abs(length) <= radius)
 	{
-		if (Dot2D(startToCenter, startToEnd) * Dot2D(endToCenter, startToEnd) <= 0)
+		if (Dot2D(vectorV2, vectorV1) * Dot2D(vectorV3, vectorV1) <= 0)
 			return true;
-		else if (radius > startToCenter.Length() || radius > endToCenter.Length())
+		else if (radius > vectorV2.Length() || radius > vectorV3.Length())
 			return true;
 	}
 	return false;
+}
+
+// 線分と線分が交差するかどうかを調べる
+inline bool IntersectLines2D
+(
+	const DirectX::SimpleMath::Vector2& v1,
+	const DirectX::SimpleMath::Vector2& v2,
+	const DirectX::SimpleMath::Vector2& v3,
+	const DirectX::SimpleMath::Vector2& v4
+)
+{
+	DirectX::SimpleMath::Vector2 fromV1ToV2 = v2 - v1;
+	DirectX::SimpleMath::Vector2 fromV1ToV3 = v3 - v1;
+	DirectX::SimpleMath::Vector2 fromV1ToV4 = v4 - v1;
+	DirectX::SimpleMath::Vector2 fromV3ToV1 = v1 - v3;
+	DirectX::SimpleMath::Vector2 fromV3ToV2 = v2 - v3;
+	DirectX::SimpleMath::Vector2 fromV3ToV4 = v4 - v3;
+
+	// 外積の結果が0の場合2つの線分は平行になる
+	if (Cross2D(fromV1ToV2, fromV3ToV4) == 0.0f)
+		return false;
+
+	return (Cross2D(fromV1ToV2, fromV1ToV3) * Cross2D(fromV1ToV2, fromV1ToV4) < 0.0f) &&
+		(Cross2D(fromV3ToV4, fromV3ToV1) * Cross2D(fromV3ToV4, fromV3ToV2) < 0.0f);
 }

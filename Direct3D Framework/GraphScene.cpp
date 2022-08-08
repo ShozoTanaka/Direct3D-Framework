@@ -46,13 +46,11 @@ GraphScene::GraphScene(Game* game)
 // デストラクタ
 GraphScene::~GraphScene()
 {
-
 }
 
 // 初期化する
 void GraphScene::Initialize()
 {
-
 }
 
 // 更新する
